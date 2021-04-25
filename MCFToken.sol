@@ -56,7 +56,7 @@ contract MCFToken is Context,IERC20,Ownable,ReentrancyGuard,Pausable {
         _name = "MCF Token";
         _symbol ="MCF";
         _decimals = 10;
-        _totalSupply = 150000000;
+        _totalSupply = 150000000 * (10 ** uint256(_decimals));
         _balances[msg.sender]=_totalSupply;
         
    }
@@ -75,6 +75,26 @@ contract MCFToken is Context,IERC20,Ownable,ReentrancyGuard,Pausable {
         return _balances[account];
     }
 
+    /**
+    * @dev Returns the token decimals.
+    */
+    function decimals() external view returns (uint8) {
+        return _decimals;
+    }
+
+    /**
+    * @dev Returns the token symbol.
+    */
+    function symbol() external view returns (string memory) {
+        return _symbol;
+    }
+
+    /**
+    * @dev Returns the token name.
+    */
+    function name() external view returns (string memory) {
+        return _name;
+    }
     /**
      * @dev See {IERC20-transfer}.
      *
