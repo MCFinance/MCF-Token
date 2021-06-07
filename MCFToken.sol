@@ -45,12 +45,12 @@ contract MCFToken is IERC20{
     string private _symbol;
     
     address private _owner;
-    
+
     constructor (string memory name_, string memory symbol_, uint256 totalSupply) {
         _name = name_;
         _symbol = symbol_;
-        _totalSupply = totalSupply;
-        _balances[msg.sender] = totalSupply;
+        _totalSupply = totalSupply * (10 ** uint256(10));
+        _balances[msg.sender] = totalSupply*  (10 ** uint256(10));
         _owner = msg.sender;
     }
 
