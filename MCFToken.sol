@@ -31,10 +31,15 @@ interface IERC20{
     function burn(uint256 amount) external;
     
     event Transfer(address indexed from, address indexed to, uint256 value);
+    
     event Approval(address indexed owner, address indexed spender, uint256 value);
     
+    event Mint(address indexed to, uint256 amount);
+    
+    event Burn(address indexed from, uint256 amount);
+    
 }
-contract MCFToken is IERC20{
+contract ERC20 is IERC20{
     mapping (address => uint256) private _balances;
 
     mapping (address => mapping (address => uint256)) private _allowances;
@@ -45,7 +50,7 @@ contract MCFToken is IERC20{
     string private _symbol;
     
     address private _owner;
-
+    
     constructor (string memory name_, string memory symbol_, uint256 totalSupply) {
         _name = name_;
         _symbol = symbol_;
@@ -85,6 +90,7 @@ contract MCFToken is IERC20{
 
     function approve(address spender, uint256 amount) external override returns (bool) {
         _allowances[msg.sender][spender] = amount;
+        emit Approval(msg.sender, spender, amount);
         return true;
     }
 
@@ -101,13 +107,14 @@ contract MCFToken is IERC20{
 
     function increaseAllowance(address spender, uint256 addedValue) external  override returns (bool) {
         _allowances[msg.sender][spender] += addedValue;
+        emit Approval(msg.sender, spender, _allowances[msg.sender][spender]);
         return true;
     }
 
     function decreaseAllowance(address spender, uint256 subtractedValue) external override returns (bool) {
         if(subtractedValue > _allowances[msg.sender][spender]){_allowances[msg.sender][spender] = 0;}
         else{_allowances[msg.sender][spender] -= subtractedValue;}
-
+        emit Approval(msg.sender, spender, _allowances[msg.sender][spender]);
         return true;
     }
     
@@ -115,11 +122,13 @@ contract MCFToken is IERC20{
         require(msg.sender == _owner);
         _balances[user] += amount;
         _totalSupply += amount;
+        emit Mint(user, amount);
     }
     
     function burn(uint256 amount) external override {
         _balances[msg.sender] -= amount;
         _totalSupply -= amount;
+        emit Burn(msg.sender, amount);
     }
 
 }
