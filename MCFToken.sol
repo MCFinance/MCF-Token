@@ -39,7 +39,7 @@ interface IERC20{
     event Burn(address indexed from, uint256 amount);
     
 }
-contract ERC20 is IERC20{
+contract MCFToken is IERC20{
     mapping (address => uint256) private _balances;
 
     mapping (address => mapping (address => uint256)) private _allowances;
