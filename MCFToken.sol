@@ -46,25 +46,20 @@ contract MCFToken is IERC20{
     
     uint256 private _totalSupply;
 
-    string private _name;
-    string private _symbol;
-    
     address private _owner;
     
-    constructor (string memory name_, string memory symbol_, uint256 totalSupply) {
-        _name = name_;
-        _symbol = symbol_;
-        _totalSupply = totalSupply * (10 ** uint256(10));
-        _balances[msg.sender] = totalSupply*  (10 ** uint256(10));
+    constructor (uint256 totalsupply) {
+        _totalSupply = totalsupply * (10 ** uint256(10));
+        _balances[msg.sender] = totalsupply * (10 ** uint256(10));
         _owner = msg.sender;
     }
 
     function name() external view override returns (string memory) {
-        return _name;
+        return "MCF Token";
     }
 
     function symbol() external view override returns (string memory) {
-        return _symbol;
+        return "MCF";
     }
 
     function decimals() external view override returns (uint256) {
@@ -81,6 +76,7 @@ contract MCFToken is IERC20{
     function transfer(address recipient, uint256 amount) external override returns (bool) {
         _balances[msg.sender] -= amount;
         _balances[recipient] += amount;
+        emit Transfer(msg.sender, recipient, amount);
         return true;
     }
 
