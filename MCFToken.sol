@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/Context.sol';
 import '@openzeppelin/contracts/utils/math/SafeMath.sol';
-import './libs/IERC20.sol';
+import './IERC20.sol';
 
 contract McfToken is Context, IERC20, Ownable {
     using SafeMath for uint256;
