@@ -5,7 +5,7 @@ mcf-v1
 https://etherscan.io/token/0x10d88ae63188987799772813778e3b697a5ae64a
 
 mcf-v2
-https://etherscan.io/address/0xe5359959b744dff74f9b189f431888f86fe3f67f
+https://etherscan.io/address/0xe33ae4e795114279721047484e5ad5cc7df24fcb
 
 
 # rinkeby
